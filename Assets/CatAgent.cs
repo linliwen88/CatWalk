@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -40,9 +41,12 @@ public class CatAgent : Agent
     [Header("Body Parts")] [Space(10)] 
     public Transform root; // for episode begin random rotation
     public Transform pelvis;
+    public Transform pelvis_forward; // forward direction of pelvis
     public Transform abdomen;
     public Transform chest;
     public Transform neck;
+    public Transform head;
+    public Transform head_forward; // forward direction of head
     public Transform flLeg_1;
     public Transform flLeg_2;
     public Transform flLeg_3;
@@ -92,6 +96,7 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(abdomen);
         m_JdController.SetupBodyPart(chest);
         m_JdController.SetupBodyPart(neck);
+        m_JdController.SetupBodyPart(head);
         m_JdController.SetupBodyPart(flLeg_1);
         m_JdController.SetupBodyPart(flLeg_2);
         m_JdController.SetupBodyPart(flLeg_3);
@@ -149,8 +154,18 @@ public class CatAgent : Agent
         //GROUND CHECK
         sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
 
+        //Get velocities in the context of our orientation cube's space
+        //Note: You can get these velocities in world space as well but it may not train as well.
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+
+        //Get position relative to hips in the context of our orientation cube's space
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - pelvis.position));
+
+        // if (bp.rb.transform != hips && bp.rb.transform != handL && bp.rb.transform != handR)
         if (bp.rb.transform != pelvis)
         {
+            sensor.AddObservation(bp.rb.transform.localRotation);
             sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
         }
     }
@@ -173,20 +188,21 @@ public class CatAgent : Agent
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
         //vel goal relative to cube
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
-        //rotation delta
-        sensor.AddObservation(Quaternion.FromToRotation(pelvis.forward, cubeForward));
+        //rotation deltas
+        sensor.AddObservation(Quaternion.FromToRotation(pelvis_forward.forward, cubeForward));
+        sensor.AddObservation(Quaternion.FromToRotation(head_forward.forward, cubeForward));
 
         //Add pos of target relative to orientation cube
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
 
-        RaycastHit hit;
-        float maxRaycastDist = 10;
-        if (Physics.Raycast(pelvis.position, Vector3.down, out hit, maxRaycastDist))
-        {
-            sensor.AddObservation(hit.distance / maxRaycastDist);
-        }
-        else
-            sensor.AddObservation(1);
+        // RaycastHit hit;
+        // float maxRaycastDist = 10;
+        // if (Physics.Raycast(pelvis.position, Vector3.down, out hit, maxRaycastDist))
+        // {
+        //     sensor.AddObservation(hit.distance / maxRaycastDist);
+        // }
+        // else
+        //     sensor.AddObservation(1);
 
         foreach (var bodyPart in m_JdController.bodyPartsList)
         {
@@ -205,6 +221,7 @@ public class CatAgent : Agent
         bpDict[abdomen].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[chest].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[neck].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[head].SetJointTargetRotation(continuousActions[++i], 0, 0);
 
         bpDict[flLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[flLeg_2].SetJointTargetRotation(continuousActions[++i], 0, 0);
@@ -232,6 +249,7 @@ public class CatAgent : Agent
         bpDict[abdomen].SetJointStrength(continuousActions[++i]);
         bpDict[chest].SetJointStrength(continuousActions[++i]);
         bpDict[neck].SetJointStrength(continuousActions[++i]);
+        bpDict[head].SetJointStrength(continuousActions[++i]);
         bpDict[flLeg_1].SetJointStrength(continuousActions[++i]);
         bpDict[flLeg_2].SetJointStrength(continuousActions[++i]);
         bpDict[flLeg_3].SetJointStrength(continuousActions[++i]);
@@ -280,9 +298,30 @@ public class CatAgent : Agent
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
 
+        //Check for NaNs
+        if (float.IsNaN(matchSpeedReward))
+        {
+            throw new ArgumentException(
+                "NaN in moveTowardsTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" hips.velocity: {m_JdController.bodyPartsDict[pelvis].rb.velocity}\n" +
+                $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+            );
+        }
+
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, pelvis.forward) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, head_forward.forward) + 1) * .5F;
+
+        //Check for NaNs
+        if (float.IsNaN(lookAtTargetReward))
+        {
+            throw new ArgumentException(
+                "NaN in lookAtTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" head.forward: {head.forward}"
+            );
+        }
 
         AddReward(matchSpeedReward * lookAtTargetReward);
     }
@@ -292,7 +331,7 @@ public class CatAgent : Agent
     /// </summary>
     void UpdateOrientationObjects()
     {
-        m_OrientationCube.UpdateOrientation(pelvis, m_Target);
+        m_OrientationCube.UpdateOrientation(pelvis_forward, m_Target);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
