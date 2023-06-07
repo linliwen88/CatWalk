@@ -229,7 +229,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &6961240208660298953
 BoxCollider:
@@ -251,9 +251,9 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894032286372641475}
-  m_ConnectedBody: {fileID: 6961240208704726380}
+  m_ConnectedBody: {fileID: 6961240208265055597}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0.00006}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -4.0023124e-11, y: 0.00059059256, z: -4.0745368e-10}
@@ -407,7 +407,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240206935677631
 CapsuleCollider:
@@ -617,7 +617,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208224876971
 CapsuleCollider:
@@ -796,7 +796,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208406834855
 CapsuleCollider:
@@ -975,7 +975,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207339949075
 CapsuleCollider:
@@ -1027,7 +1027,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 104.02693
+    limit: 51.26599
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
@@ -1154,7 +1154,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208704726382
 CapsuleCollider:
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
@@ -1333,7 +1333,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &6961240207591024364
 BoxCollider:
@@ -1357,7 +1357,7 @@ ConfigurableJoint:
   m_GameObject: {fileID: 3043266970519743789}
   m_ConnectedBody: {fileID: 6961240208022883978}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0.00006}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -8.230928e-11, y: 0.00023707643, z: 6.366462e-11}
@@ -1511,7 +1511,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207958319023
 CapsuleCollider:
@@ -1534,7 +1534,7 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3071181355280709272}
-  m_ConnectedBody: {fileID: 6961240208149772442}
+  m_ConnectedBody: {fileID: 6961240208298314809}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -1690,7 +1690,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207256948529
 CapsuleCollider:
@@ -1877,7 +1877,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3208251504578267826}
-  m_LocalRotation: {x: -0.094991416, y: 0.7300231, z: -0.674308, w: -0.057893023}
+  m_LocalRotation: {x: 0.042998917, y: 0.7349205, z: -0.67325795, w: 0.06904093}
   m_LocalPosition: {x: 0.001348045, y: 0.00035764335, z: 0.0016561924}
   m_LocalScale: {x: 1, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
@@ -1885,7 +1885,7 @@ Transform:
   - {fileID: 3763983237638512983}
   m_Father: {fileID: 1990915639716497193}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 95.425995, y: 692.555, z: 500.129}
+  m_LocalEulerAnglesHint: {x: 95.425995, y: 692.555, z: 521.653}
 --- !u!54 &6961240208149772442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1900,7 +1900,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208149772436
 CapsuleCollider:
@@ -2110,7 +2110,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207590216931
 CapsuleCollider:
@@ -2503,7 +2503,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240206896643865
 CapsuleCollider:
@@ -2935,9 +2935,9 @@ Rigidbody:
   m_Drag: 0.05
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207931675949
 CapsuleCollider:
@@ -3020,7 +3020,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208265055599
 CapsuleCollider:
@@ -3043,7 +3043,7 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5021527051628174784}
-  m_ConnectedBody: {fileID: 6961240208317129325}
+  m_ConnectedBody: {fileID: 6961240207958319021}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -3145,7 +3145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
@@ -3261,7 +3261,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &6961240207883000929
 BoxCollider:
@@ -3285,10 +3285,10 @@ ConfigurableJoint:
   m_GameObject: {fileID: 5336247384577718002}
   m_ConnectedBody: {fileID: 6961240208704726380}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0.00006}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -2.0008883e-11, y: 0.0005913196, z: 1.7462298e-10}
+  m_ConnectedAnchor: {x: 6.48015e-11, y: 0.00059131894, z: 2.910383e-11}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -3472,7 +3472,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240207220079845
 CapsuleCollider:
@@ -3651,7 +3651,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208317129327
 CapsuleCollider:
@@ -3830,7 +3830,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &6961240206935777915
 BoxCollider:
@@ -3854,7 +3854,7 @@ ConfigurableJoint:
   m_GameObject: {fileID: 6393558728114123757}
   m_ConnectedBody: {fileID: 6961240207339949073}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0.00006}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 1.7735148e-11, y: 0.00023707475, z: 8.949428e-10}
@@ -4008,7 +4008,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208298314811
 CapsuleCollider:
@@ -4440,7 +4440,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &6961240208420315031
 CapsuleCollider:
@@ -4975,7 +4975,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 64
   m_CollisionDetection: 3
 --- !u!136 &6961240208022883972
 CapsuleCollider:
@@ -5027,7 +5027,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 101.25487
+    limit: 49.67922
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -5100,7 +5100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
