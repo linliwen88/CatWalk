@@ -138,7 +138,7 @@ public class CatAgent : Agent
         }
 
         //Random start rotation to help generalize
-        root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        // root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
 
         UpdateOrientationObjects();
 
