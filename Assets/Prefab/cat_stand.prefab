@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89770088062061923}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: -0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 5961057005967287045}
   m_Father: {fileID: 7426983802653218743}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &420528589733208240
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +357,7 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &1180098153899357712
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,11 +456,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -64.0931
+    limit: -11.195604
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 57.93689
+    limit: 42.85559
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -532,10 +533,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &1567010695160723337
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,11 +667,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -30
+    limit: -12.711688
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 30
+    limit: 13.098328
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -744,8 +746,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &2066643581829344515
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +847,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -98.72752
+    limit: -53.434666
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
@@ -855,7 +858,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 30
+    limit: 18.211792
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -921,10 +924,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &2468125376540324138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,10 +1104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &2668702414588075648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,10 +1284,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3043266970519743789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1397,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 16.306952
+    limit: 6.38175
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -1461,6 +1467,7 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3071181355280709272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,10 +1643,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3074378463121079282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,8 +1825,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3207017712066221648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,10 +2034,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3261156135163453531
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,11 +2168,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -42.385414
+    limit: -12.835672
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 63.893837
+    limit: 41.34629
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -2235,10 +2245,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3510919155360203659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,8 +2427,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3530253585133437739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,18 +2563,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -15
+    limit: -10.682072
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 15
+    limit: 12.933716
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 8.884682
+    limit: 6.664345
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -2630,8 +2642,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &3932616209746305787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2687,14 +2700,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3976400278475383454}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8898909090301739085}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &4029730337922118012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,8 +2981,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &5021527051628174784
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,10 +3159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &5109030327534197005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,6 +3404,7 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &5466770295319916177
 GameObject:
   m_ObjectHideFlags: 0
@@ -3599,8 +3615,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.02
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &6357356663463388012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,10 +3793,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &6393558728114123757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,7 +3906,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 12.609879
+    limit: 6.1884003
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -3958,6 +3976,7 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &6433619952929297241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4133,10 +4152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &6813798642715903995
 GameObject:
   m_ObjectHideFlags: 0
@@ -4488,18 +4508,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -99.648544
+    limit: -71.05469
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 33.08787
+    limit: 20.20282
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 30
+    limit: 17.434582
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -4565,10 +4585,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1 &7699039404951864215
 GameObject:
   m_ObjectHideFlags: 0
@@ -4758,7 +4779,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7807591145164885261}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
@@ -4784,7 +4805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 343
+    VectorObservationSize: 325
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 54
@@ -4793,9 +4814,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 99c5bc834d9a20e4896103addfd9daa6, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: Cat
   TeamId: 0
   m_UseChildSensors: 1
@@ -4816,8 +4837,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 3000
-  m_TargetWalkingSpeed: 15
+  MaxStep: 5000
   TargetPrefab: {fileID: 7834940038056149002, guid: a3b95a04234f9b24f8a6901810486e1d, type: 3}
   root: {fileID: 7426983802653218743}
   pelvis: {fileID: 8898909090301739085}
@@ -4844,13 +4864,6 @@ MonoBehaviour:
   brLeg_3: {fileID: 2049593544160914397}
   brLeg_4: {fileID: 6200256294939886634}
   tail: {fileID: 5961057005967287045}
-  useFootGroundedVisualization: 0
-  foot0: {fileID: 0}
-  foot1: {fileID: 0}
-  foot2: {fileID: 0}
-  foot3: {fileID: 0}
-  groundedMaterial: {fileID: 0}
-  unGroundedMaterial: {fileID: 0}
 --- !u!114 &6961240208560947771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4865,7 +4878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxJointSpring: 40000
   jointDampen: 5000
-  maxJointForceLimit: 250000
+  maxJointForceLimit: 20000
   bodyPartsList: []
 --- !u!114 &4224436996410390945
 MonoBehaviour:
@@ -5100,10 +5113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
+  agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -0.01
   touchingGround: 0
+  touchingWall: 0
 --- !u!1001 &6917642401956421360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5116,8 +5130,12 @@ PrefabInstance:
       value: DirectionIndicator
       objectReference: {fileID: 0}
     - target: {fileID: 6026464216722085689, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
+      propertyPath: targetToLookAt
+      value: 
+      objectReference: {fileID: 4956489083297129859, guid: a3b95a04234f9b24f8a6901810486e1d, type: 3}
+    - target: {fileID: 6026464216722085689, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
       propertyPath: updatedByAgent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6026464216722085689, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
       propertyPath: transformToFollow

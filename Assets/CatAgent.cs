@@ -9,29 +9,29 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(JointDriveController))] // Required to set joint forces
 public class CatAgent : Agent
 {
-    [Header("Walk Speed")]
-    [Range(0.1f, m_maxWalkingSpeed)]
-    [SerializeField]
-    [Tooltip(
-        "The speed the agent will try to match.\n\n" +
-        "TRAINING:\n" +
-        "For VariableSpeed envs, this value will randomize at the start of each training episode.\n" +
-        "Otherwise the agent will try to match the speed set here.\n\n" +
-        "INFERENCE:\n" +
-        "During inference, VariableSpeed agents will modify their behavior based on this value " +
-        "whereas the CrawlerDynamic & CrawlerStatic agents will run at the speed specified during training "
-    )]
-    //The walking speed to try and achieve
-    private float m_TargetWalkingSpeed = m_maxWalkingSpeed;
+    // [Header("Walk Speed")]
+    // [Range(0.1f, m_maxWalkingSpeed)]
+    // [SerializeField]
+    // [Tooltip(
+    //     "The speed the agent will try to match.\n\n" +
+    //     "TRAINING:\n" +
+    //     "For VariableSpeed envs, this value will randomize at the start of each training episode.\n" +
+    //     "Otherwise the agent will try to match the speed set here.\n\n" +
+    //     "INFERENCE:\n" +
+    //     "During inference, VariableSpeed agents will modify their behavior based on this value " +
+    //     "whereas the CrawlerDynamic & CrawlerStatic agents will run at the speed specified during training "
+    // )]
+    // //The walking speed to try and achieve
+    // private float m_TargetWalkingSpeed = m_maxWalkingSpeed;
 
-    const float m_maxWalkingSpeed = 15; //The max walking speed
+    // const float m_maxWalkingSpeed = 15; //The max walking speed
 
-    //The current target walking speed. Clamped because a value of zero will cause NaNs
-    public float TargetWalkingSpeed
-    {
-        get { return m_TargetWalkingSpeed; }
-        set { m_TargetWalkingSpeed = Mathf.Clamp(value, .1f, m_maxWalkingSpeed); }
-    }
+    // //The current target walking speed. Clamped because a value of zero will cause NaNs
+    // public float TargetWalkingSpeed
+    // {
+    //     get { return m_TargetWalkingSpeed; }
+    //     set { m_TargetWalkingSpeed = Mathf.Clamp(value, .1f, m_maxWalkingSpeed); }
+    // }
 
     //The direction an agent will walk during training.
     [Header("Target To Walk Towards")]
@@ -64,6 +64,13 @@ public class CatAgent : Agent
     public Transform brLeg_3;
     public Transform brLeg_4;
     public Transform tail;
+
+    private float m_bodyHeight;
+    private int feetInFrontCounter_front = 0; // the amount of steps one foot is in front of the other
+    private int feetInFrontCounter_back = 0; // the amount of steps one foot is in front of the other
+    private bool isLeftFootFront_front; // true: front left foot is currently in front of front right foot
+    private bool isLeftFootFront_back; // // true: back left foot is currently in front of back right foot
+
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
     OrientationCubeController m_OrientationCube;
@@ -72,21 +79,10 @@ public class CatAgent : Agent
     DirectionIndicator m_DirectionIndicator;
     JointDriveController m_JdController;
 
-    [Header("Foot Grounded Visualization")]
-    [Space(10)]
-    public bool useFootGroundedVisualization;
-
-    public MeshRenderer foot0;
-    public MeshRenderer foot1;
-    public MeshRenderer foot2;
-    public MeshRenderer foot3;
-    public Material groundedMaterial;
-    public Material unGroundedMaterial;
-
     public override void Initialize()
     {
-        SpawnTarget(TargetPrefab, transform.position); //spawn target
-
+        // SpawnTarget(TargetPrefab, transform.position); //spawn target
+        m_Target = TargetPrefab;
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
         m_JdController = GetComponent<JointDriveController>();
@@ -115,6 +111,11 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(brLeg_4);
         m_JdController.SetupBodyPart(tail);
 
+        // Initialize body height to detect if cat is standing
+        m_bodyHeight = GetBodyHeight();
+
+        Debug.Log("Init body height: " + m_bodyHeight);
+
     }
 
     /// <summary>
@@ -142,8 +143,8 @@ public class CatAgent : Agent
 
         UpdateOrientationObjects();
 
-        //Set our goal walking speed
-        TargetWalkingSpeed = Random.Range(0.1f, m_maxWalkingSpeed);
+        // //Set our goal walking speed
+        // TargetWalkingSpeed = Random.Range(0.1f, m_maxWalkingSpeed);
     }
 
     /// <summary>
@@ -151,22 +152,35 @@ public class CatAgent : Agent
     /// </summary>
     public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
     {
-        //GROUND CHECK
-        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
-
-        //Get velocities in the context of our orientation cube's space
-        //Note: You can get these velocities in world space as well but it may not train as well.
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
-
-        //Get position relative to hips in the context of our orientation cube's space
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - pelvis.position));
-
-        // if (bp.rb.transform != hips && bp.rb.transform != handL && bp.rb.transform != handR)
-        if (bp.rb.transform != pelvis)
+        // Observation of other body parts
+        if( bp.rb.transform == pelvis || bp.rb.transform == abdomen || bp.rb.transform == chest ||
+            bp.rb.transform == neck || bp.rb.transform == head || bp.rb.transform == tail)
         {
             sensor.AddObservation(bp.rb.transform.localRotation);
             sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+
+            // Ground and wall check
+            sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+            sensor.AddObservation(bp.groundContact.touchingWall); // Is this bp touching the wall
+
+        }
+        // Observations of the limbs
+        else 
+        {
+            //Get position relative to pelvis in the context of our orientation cube's space
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - pelvis.position));
+
+            // Get velocities in the context of our orientation cube's space
+            // Note: You can get these velocities in world space as well but it may not train as well.
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+
+            sensor.AddObservation(bp.rb.transform.localRotation);
+            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+
+            // Ground and wall check
+            sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+            sensor.AddObservation(bp.groundContact.touchingWall); // Is this bp touching the wall
         }
     }
 
@@ -175,25 +189,25 @@ public class CatAgent : Agent
     /// </summary>
     public override void CollectObservations(VectorSensor sensor)
     {
-        var cubeForward = m_OrientationCube.transform.forward;
+        // var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
-        var velGoal = cubeForward * TargetWalkingSpeed;
+        // var velGoal = cubeForward * TargetWalkingSpeed;
         //ragdoll's avg vel
-        var avgVel = GetAvgVelocity();
+        // var avgVel = GetAvgVelocity();
 
         //current ragdoll velocity. normalized
-        sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
+        // sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
         //avg body vel relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
+        // sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
         //vel goal relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
+        // sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
         //rotation deltas
-        sensor.AddObservation(Quaternion.FromToRotation(pelvis_forward.forward, cubeForward));
-        sensor.AddObservation(Quaternion.FromToRotation(head_forward.forward, cubeForward));
+        // sensor.AddObservation(Quaternion.FromToRotation(pelvis_forward.forward, cubeForward));
+        // sensor.AddObservation(Quaternion.FromToRotation(head_forward.forward, cubeForward));
 
         //Add pos of target relative to orientation cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
+        // sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
 
         // RaycastHit hit;
         // float maxRaycastDist = 10;
@@ -208,6 +222,31 @@ public class CatAgent : Agent
         {
             CollectObservationBodyPart(bodyPart, sensor);
         }
+
+        // Distance from each foot to the ground
+        sensor.AddObservation(flLeg_4.transform.position.y);
+        sensor.AddObservation(frLeg_4.transform.position.y);
+        sensor.AddObservation(blLeg_4.transform.position.y);
+        sensor.AddObservation(brLeg_4.transform.position.y);
+        
+        // Direction to target
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
+
+        // Direction of body
+        sensor.AddObservation(pelvis_forward.forward);
+
+        // Velocity of body
+        sensor.AddObservation(GetBodyVelocity());
+
+        // Distance from abdomen to feet
+        sensor.AddObservation(Vector3.Distance(abdomen.transform.position, flLeg_4.transform.position));
+        sensor.AddObservation(Vector3.Distance(abdomen.transform.position, frLeg_4.transform.position));
+        sensor.AddObservation(Vector3.Distance(abdomen.transform.position, blLeg_4.transform.position));
+        sensor.AddObservation(Vector3.Distance(abdomen.transform.position, brLeg_4.transform.position));
+
+        // Amount of time one foot has been in front of the other
+        sensor.AddObservation((float)feetInFrontCounter_front);
+        sensor.AddObservation((float)feetInFrontCounter_back);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -272,58 +311,44 @@ public class CatAgent : Agent
     void FixedUpdate()
     {
         UpdateOrientationObjects();
+        UpdateFeetForwardCount();
 
-        // If enabled the feet will light up green when the foot is grounded.
-        // This is just a visualization and isn't necessary for function
-        if (useFootGroundedVisualization)
-        {
-            foot0.material = m_JdController.bodyPartsDict[flLeg_4].groundContact.touchingGround
-                ? groundedMaterial
-                : unGroundedMaterial;
-            foot1.material = m_JdController.bodyPartsDict[frLeg_4].groundContact.touchingGround
-                ? groundedMaterial
-                : unGroundedMaterial;
-            foot2.material = m_JdController.bodyPartsDict[blLeg_4].groundContact.touchingGround
-                ? groundedMaterial
-                : unGroundedMaterial;
-            foot3.material = m_JdController.bodyPartsDict[brLeg_4].groundContact.touchingGround
-                ? groundedMaterial
-                : unGroundedMaterial;
-        }
+        // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
+        AddReward((((GetBodyHeight() - m_bodyHeight) / m_bodyHeight) * 2.0f) + 1.0f);
 
-        var cubeForward = m_OrientationCube.transform.forward;
+        // var cubeForward = m_OrientationCube.transform.forward;
 
-        // Set reward for this step according to mixture of the following elements.
-        // a. Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
+        // // Set reward for this step according to mixture of the following elements.
+        // // a. Match target speed
+        // //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        // var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
 
-        //Check for NaNs
-        if (float.IsNaN(matchSpeedReward))
-        {
-            throw new ArgumentException(
-                "NaN in moveTowardsTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" hips.velocity: {m_JdController.bodyPartsDict[pelvis].rb.velocity}\n" +
-                $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
-            );
-        }
+        // //Check for NaNs
+        // if (float.IsNaN(matchSpeedReward))
+        // {
+        //     throw new ArgumentException(
+        //         "NaN in moveTowardsTargetReward.\n" +
+        //         $" cubeForward: {cubeForward}\n" +
+        //         $" hips.velocity: {m_JdController.bodyPartsDict[pelvis].rb.velocity}\n" +
+        //         $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+        //     );
+        // }
 
-        // b. Rotation alignment with target direction.
-        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, head_forward.forward) + 1) * .5F;
+        // // b. Rotation alignment with target direction.
+        // //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head_forward.forward) + 1) * .5F;
 
-        //Check for NaNs
-        if (float.IsNaN(lookAtTargetReward))
-        {
-            throw new ArgumentException(
-                "NaN in lookAtTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" head.forward: {head.forward}"
-            );
-        }
+        // //Check for NaNs
+        // if (float.IsNaN(lookAtTargetReward))
+        // {
+        //     throw new ArgumentException(
+        //         "NaN in lookAtTargetReward.\n" +
+        //         $" cubeForward: {cubeForward}\n" +
+        //         $" head.forward: {head.forward}"
+        //     );
+        // }
 
-        AddReward(matchSpeedReward * lookAtTargetReward);
+        // AddReward(matchSpeedReward * lookAtTargetReward);
     }
 
     /// <summary>
@@ -331,11 +356,73 @@ public class CatAgent : Agent
     /// </summary>
     void UpdateOrientationObjects()
     {
-        m_OrientationCube.UpdateOrientation(pelvis_forward, m_Target);
+        m_OrientationCube.UpdateOrientation(pelvis, m_Target);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
         }
+    }
+
+    void UpdateFeetForwardCount()
+    {
+        // var currentStep = this.StepCount;
+
+        // note: the cat is walking in negative-x direction
+
+        // front feet
+        if(flLeg_4.transform.position.x < frLeg_4.transform.position.x) // left foot is currently in front
+        {
+            if(isLeftFootFront_front == true)
+            {
+                feetInFrontCounter_front++;
+            }
+            else
+            {
+                feetInFrontCounter_front = 1;
+                isLeftFootFront_front = true;
+            }
+        }
+        else
+        {
+            if(isLeftFootFront_front == false)
+            {
+                feetInFrontCounter_front++;
+            }
+            else
+            {
+                feetInFrontCounter_front = 1;
+                isLeftFootFront_front = false;
+            }
+        }
+
+        // back feet
+        if(blLeg_4.transform.position.x < brLeg_4.transform.position.x) // left foot is currently in front
+        {
+            if(isLeftFootFront_back == true)
+            {
+                feetInFrontCounter_back++;
+            }
+            else
+            {
+                feetInFrontCounter_back = 1;
+                isLeftFootFront_back = true;
+            }
+        }
+        else
+        {
+            if(isLeftFootFront_back == false)
+            {
+                feetInFrontCounter_back++;
+            }
+            else
+            {
+                feetInFrontCounter_back = 1;
+                isLeftFootFront_back = false;
+            }
+        }
+
+        Debug.Log("feetInFrontCounter_front: " + feetInFrontCounter_front);
+        Debug.Log("feetInFrontCounter_back: " + feetInFrontCounter_back);
     }
 
     /// <summary>
@@ -360,18 +447,45 @@ public class CatAgent : Agent
         return avgVel;
     }
 
+    Vector3 GetBodyVelocity()
+    {
+        Vector3 bodyVel = Vector3.zero;
+
+        var bpDict = m_JdController.bodyPartsDict;
+
+        bodyVel += bpDict[pelvis].rb.velocity;
+        bodyVel += bpDict[abdomen].rb.velocity;
+        bodyVel += bpDict[chest].rb.velocity;
+
+        bodyVel /= 3.0f;
+
+        return bodyVel;
+    }
+
+    float GetBodyHeight()
+    {
+        float height = 0.0f;
+
+        height += pelvis.transform.position.y;
+        height += abdomen.transform.position.y;
+        height += chest.transform.position.y;
+        height /= 3.0f;
+
+        return height;
+    }
+
     /// <summary>
     /// Normalized value of the difference in actual speed vs goal walking speed.
     /// </summary>
-    public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
-    {
-        //distance between our actual velocity and goal velocity
-        var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, TargetWalkingSpeed);
+    // public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
+    // {
+    //     //distance between our actual velocity and goal velocity
+    //     var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, TargetWalkingSpeed);
 
-        //return the value on a declining sigmoid shaped curve that decays from 1 to 0
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
-    }
+    //     //return the value on a declining sigmoid shaped curve that decays from 1 to 0
+    //     //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+    //     return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
+    // }
 
     /// <summary>
     /// Agent touched the target
