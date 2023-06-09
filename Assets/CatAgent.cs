@@ -313,10 +313,13 @@ public class CatAgent : Agent
         UpdateOrientationObjects();
         UpdateFeetForwardCount();
 
+        // Geometric rewards prevents the agent only improving easy tasks.
         // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
-        AddReward((((GetBodyHeight() - m_bodyHeight) / m_bodyHeight) * 2.0f) + 1.0f);
+        var standingReward = (((GetBodyHeight() - m_bodyHeight) / m_bodyHeight) * 2.0f) + 1.0f;
 
-        // var cubeForward = m_OrientationCube.transform.forward;
+        // 2nd objective: move towards the target. [-1, 1]
+        var cubeForward = m_OrientationCube.transform.forward;
+        var moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
 
         // // Set reward for this step according to mixture of the following elements.
         // // a. Match target speed
@@ -349,6 +352,8 @@ public class CatAgent : Agent
         // }
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
+
+        AddReward(standingReward * moveForwardReward);
     }
 
     /// <summary>
@@ -421,8 +426,8 @@ public class CatAgent : Agent
             }
         }
 
-        Debug.Log("feetInFrontCounter_front: " + feetInFrontCounter_front);
-        Debug.Log("feetInFrontCounter_back: " + feetInFrontCounter_back);
+        // Debug.Log("feetInFrontCounter_front: " + feetInFrontCounter_front);
+        // Debug.Log("feetInFrontCounter_back: " + feetInFrontCounter_back);
     }
 
     /// <summary>
