@@ -354,7 +354,7 @@ public class CatAgent : Agent
         var feetVelReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgFeetVelocity());
         var feetDirReward = (Vector3.Dot(cubeForward, GetAvgFeetDirection()) + 1) * 0.5f;
 
-        var feetReward = matchSpeedReward * lookAtTargetReward;
+        var feetReward = feetVelReward * feetDirReward;
 
         // Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
         // AddReward(matchSpeedReward * lookAtTargetReward);
