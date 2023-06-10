@@ -65,8 +65,10 @@ public class CatAgent : Agent
     public Transform brLeg_4;
     public Transform tail;
 
-    private float m_bodyHeight;
+    private float m_InitBodyHeight;
     private float m_InitDistToTarget;
+    private float m_curDistToTarget;
+    private float m_prevDistToTarget;
     private int feetInFrontCounter_front = 0; // the amount of steps one foot is in front of the other
     private int feetInFrontCounter_back = 0; // the amount of steps one foot is in front of the other
     private bool isLeftFootFront_front; // true: front left foot is currently in front of front right foot
@@ -113,10 +115,11 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(tail);
 
         // Initialize body height to detect if cat is standing
-        m_bodyHeight = GetBodyHeight();
+        m_InitBodyHeight = GetBodyHeight();
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
+        m_prevDistToTarget = m_InitDistToTarget;
 
-        Debug.Log("Init body height: " + m_bodyHeight);
+        Debug.Log("Init body height: " + m_InitBodyHeight);
         Debug.Log("Init distance to target: " + m_InitDistToTarget);
 
     }
@@ -318,14 +321,27 @@ public class CatAgent : Agent
 
         // Geometric rewards prevents the agent only improving easy tasks.
         // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
-        float standingReward = (((GetBodyHeight() - m_bodyHeight) / m_bodyHeight) * 2.0f) + 1.0f;
+        float standingReward = (((GetBodyHeight() - m_InitBodyHeight) / m_InitBodyHeight) * 2.0f) + 1.0f;
 
-        // 2nd objective: move towards the target. [-1, 1]
-        // var cubeForward = m_OrientationCube.transform.forward;
-        // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
-        float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-        float moveForwardReward = ((curDistToTarget / m_InitDistToTarget) * -2.0f) + 1.0f;
+        // 2nd objective: move towards the target. [0, 1]
+        float moveForwardReward;
+        m_curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
 
+        if(m_curDistToTarget < m_prevDistToTarget)
+        {
+            moveForwardReward = 1.0f;
+            Debug.Log("Current distance to target: " + m_curDistToTarget);
+        }
+        else
+        {
+            moveForwardReward = 0.0f;
+        }
+        m_prevDistToTarget = m_curDistToTarget;
+
+
+        // 3rd objective: Altering legs. Reward only 2 feet on ground at any time. [-1, 1]
+        // float feetAlterReward;
+        
 
         // // Set reward for this step according to mixture of the following elements.
         // // a. Match target speed
