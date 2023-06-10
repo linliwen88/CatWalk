@@ -74,7 +74,7 @@ public class CatAgent : Agent
     private bool isLeftFootFront_back; // // true: back left foot is currently in front of back right foot
 
 
-    private float TargetWalkingSpeed = 5.0f;
+    private float TargetWalkingSpeed = 2.0f;
 
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
@@ -119,6 +119,10 @@ public class CatAgent : Agent
         // Initialize body height to detect if cat is standing
         m_bodyHeight = GetBodyHeight();
         min_bodyHeight = flLeg_4.transform.position.y;
+
+        var h_diff = m_bodyHeight - min_bodyHeight;
+        m_bodyHeight = h_diff * 0.9f + min_bodyHeight;
+
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
 
         Debug.Log("Init body height: " + m_bodyHeight + ", min body height: " + min_bodyHeight);
@@ -333,7 +337,7 @@ public class CatAgent : Agent
 
         // Geometric rewards prevents the agent only improving easy tasks.
         // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
-        float standingReward = (GetBodyHeight() - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
+        float standingReward = (Math.Min(GetBodyHeight(), m_bodyHeight) - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
 
         // 2nd objective: move towards the target. [-1, 1]
         // var cubeForward = m_OrientationCube.transform.forward;
