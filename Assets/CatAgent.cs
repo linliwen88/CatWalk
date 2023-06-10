@@ -343,18 +343,34 @@ public class CatAgent : Agent
         // var cubeForward = m_OrientationCube.transform.forward;
         // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
         float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
+
         float moveForwardReward = Mathf.Pow(1.0f - Mathf.Pow(curDistToTarget / m_InitDistToTarget, 2), 2);
+        if((curDistToTarget / m_InitDistToTarget) > 1.0f)
+        {
+            moveForwardReward = (1.0f - (curDistToTarget / m_InitDistToTarget)) * 20.0f;
+        }
 
         var cubeForward = m_OrientationCube.transform.forward;
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetBodyVelocity());
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, abdomen.forward) + 1) * 0.5f;
+        var lookAtTargetReward = Vector3.Dot(cubeForward, abdomen.forward);
 
         var bodyReward = matchSpeedReward * lookAtTargetReward;
 
         var feetVelReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgFeetVelocity());
-        var feetDirReward = (Vector3.Dot(cubeForward, GetAvgFeetDirection()) + 1) * 0.5f;
+        var feetDirReward = Vector3.Dot(cubeForward, GetAvgFeetDirection());
 
         var feetReward = feetVelReward * feetDirReward;
+
+        // penalize for moving away
+        if(lookAtTargetReward < 0)
+        {
+            bodyReward *= 20;
+        }
+
+        if (feetReward < 0)
+        {
+            feetReward *= 20;
+        }
 
         // Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
         // AddReward(matchSpeedReward * lookAtTargetReward);
