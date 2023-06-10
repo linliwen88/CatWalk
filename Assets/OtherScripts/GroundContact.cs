@@ -31,7 +31,7 @@ namespace Unity.MLAgentsExamples
                 touchingGround = true;
                 if (penalizeGroundContact)
                 {
-                    Debug.Log(gameObject.name + " touch ground.");
+                    // Debug.Log(gameObject.name + " touch ground.");
                     agent.AddReward(groundContactPenalty);
                 }
 

@@ -66,11 +66,15 @@ public class CatAgent : Agent
     public Transform tail;
 
     private float m_bodyHeight;
+    private float min_bodyHeight;
     private float m_InitDistToTarget;
     private int feetInFrontCounter_front = 0; // the amount of steps one foot is in front of the other
     private int feetInFrontCounter_back = 0; // the amount of steps one foot is in front of the other
     private bool isLeftFootFront_front; // true: front left foot is currently in front of front right foot
     private bool isLeftFootFront_back; // // true: back left foot is currently in front of back right foot
+
+
+    private float TargetWalkingSpeed = 5.0f;
 
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
@@ -114,9 +118,10 @@ public class CatAgent : Agent
 
         // Initialize body height to detect if cat is standing
         m_bodyHeight = GetBodyHeight();
+        min_bodyHeight = flLeg_4.transform.position.y;
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
 
-        Debug.Log("Init body height: " + m_bodyHeight);
+        Debug.Log("Init body height: " + m_bodyHeight + ", min body height: " + min_bodyHeight);
         Debug.Log("Init distance to target: " + m_InitDistToTarget);
 
     }
@@ -311,55 +316,49 @@ public class CatAgent : Agent
         bpDict[tail].SetJointStrength(continuousActions[++i]);
     }
 
+    public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
+    {
+        //distance between our actual velocity and goal velocity
+        var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, TargetWalkingSpeed);
+
+        //return the value on a declining sigmoid shaped curve that decays from 1 to 0
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
+    }
+
     void FixedUpdate()
     {
         UpdateOrientationObjects();
         UpdateFeetForwardCount();
 
         // Geometric rewards prevents the agent only improving easy tasks.
-        // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
-        float standingReward = (((GetBodyHeight() - m_bodyHeight) / m_bodyHeight) * 2.0f) + 1.0f;
+        // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
+        float standingReward = (GetBodyHeight() - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
 
         // 2nd objective: move towards the target. [-1, 1]
         // var cubeForward = m_OrientationCube.transform.forward;
         // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
         float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-        float moveForwardReward = ((curDistToTarget / m_InitDistToTarget) * -2.0f) + 1.0f;
+        float moveForwardReward = ((((curDistToTarget / m_InitDistToTarget) * -2.0f) + 1.0f) + 1.0f) / 2.0f;
 
+        var cubeForward = m_OrientationCube.transform.forward;
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetBodyVelocity());
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, abdomen.forward) + 1) * 0.5f;
 
-        // // Set reward for this step according to mixture of the following elements.
-        // // a. Match target speed
-        // //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        // var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
+        var bodyReward = matchSpeedReward * lookAtTargetReward;
 
-        // //Check for NaNs
-        // if (float.IsNaN(matchSpeedReward))
-        // {
-        //     throw new ArgumentException(
-        //         "NaN in moveTowardsTargetReward.\n" +
-        //         $" cubeForward: {cubeForward}\n" +
-        //         $" hips.velocity: {m_JdController.bodyPartsDict[pelvis].rb.velocity}\n" +
-        //         $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
-        //     );
-        // }
+        var feetVelReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgFeetVelocity());
+        var feetDirReward = (Vector3.Dot(cubeForward, GetAvgFeetDirection()) + 1) * 0.5f;
 
-        // // b. Rotation alignment with target direction.
-        // //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head_forward.forward) + 1) * .5F;
+        var feetReward = matchSpeedReward * lookAtTargetReward;
 
-        // //Check for NaNs
-        // if (float.IsNaN(lookAtTargetReward))
-        // {
-        //     throw new ArgumentException(
-        //         "NaN in lookAtTargetReward.\n" +
-        //         $" cubeForward: {cubeForward}\n" +
-        //         $" head.forward: {head.forward}"
-        //     );
-        // }
-
+        // Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward(standingReward * moveForwardReward);
+        AddReward(standingReward);
+        AddReward(moveForwardReward);
+        AddReward(bodyReward);
+        AddReward(feetReward);
     }
 
     /// <summary>
@@ -471,6 +470,39 @@ public class CatAgent : Agent
         bodyVel /= 3.0f;
 
         return bodyVel;
+    }
+
+    Vector3 GetAvgFeetVelocity()
+    {
+        Vector3 avgFeetVel = Vector3.zero;
+
+        var bpDict = m_JdController.bodyPartsDict;
+
+        avgFeetVel += bpDict[blLeg_4].rb.velocity;
+        avgFeetVel += bpDict[brLeg_4].rb.velocity;
+        avgFeetVel += bpDict[flLeg_4].rb.velocity;
+        avgFeetVel += bpDict[frLeg_4].rb.velocity;
+
+        avgFeetVel /= 4.0f;
+
+        return avgFeetVel;
+    }
+
+    Vector3 GetAvgFeetDirection()
+    {
+        Vector3 avgFeetDir = Vector3.zero;
+
+        var bpDict = m_JdController.bodyPartsDict;
+
+        // (Vector3.Dot(cubeForward, abdomen.forward) + 1) * 0.5f;
+        avgFeetDir += flLeg_4.forward;
+        avgFeetDir += blLeg_4.forward;
+        avgFeetDir += frLeg_4.forward;
+        avgFeetDir += brLeg_4.forward;
+
+        avgFeetDir /= 4.0f;
+
+        return avgFeetDir;
     }
 
     float GetBodyHeight()
