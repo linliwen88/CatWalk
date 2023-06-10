@@ -276,18 +276,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -23.575218
+    limit: -13.179422
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 71.97424
+    limit: 59.350327
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 14.168253
+    limit: 10.034209
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -847,18 +847,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -53.434666
+    limit: -46.326633
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 44.893436
+    limit: 30.486515
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 18.211792
+    limit: 16.233276
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -1207,11 +1207,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -47.611095
+    limit: -24.286808
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 70.52983
+    limit: 51.590668
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1390,7 +1390,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 75.080444
+    limit: 60.16739
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1746,11 +1746,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -30
+    limit: -15.916932
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 30
+    limit: 18.447418
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1957,18 +1957,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -44.070282
+    limit: -28.596153
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 95.30298
+    limit: 49.859806
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 30
+    limit: 20.19647
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -3327,14 +3327,14 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 67.893684
+    limit: 47.78611
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 13.027587
+    limit: 9.681792
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -3536,11 +3536,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -30
+    limit: -24.9217
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 28.416044
+    limit: 25.454414
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -3716,11 +3716,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -35.821857
+    limit: -5.2459064
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 100.87977
+    limit: 73.78504
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -3895,11 +3895,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -10.828148
+    limit: -13.591338
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 82.625435
+    limit: 57.046837
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -4075,18 +4075,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -71.992065
+    limit: -57.06175
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 56.20885
+    limit: 23.11695
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 30
+    limit: 21.705105
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -4508,18 +4508,18 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -71.05469
+    limit: -58.672535
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 20.20282
+    limit: 19.09547
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 17.434582
+    limit: 15.824203
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
