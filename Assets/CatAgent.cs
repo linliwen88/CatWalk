@@ -343,7 +343,7 @@ public class CatAgent : Agent
         // var cubeForward = m_OrientationCube.transform.forward;
         // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
         float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-        float moveForwardReward = ((((curDistToTarget / m_InitDistToTarget) * -2.0f) + 1.0f) + 1.0f) / 2.0f;
+        float moveForwardReward = 1.0f - (curDistToTarget / m_InitDistToTarget);
 
         var cubeForward = m_OrientationCube.transform.forward;
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetBodyVelocity());
