@@ -324,7 +324,7 @@ public class CatAgent : Agent
         // var cubeForward = m_OrientationCube.transform.forward;
         // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
         float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-        float moveForwardReward = ((curDistToTarget / m_InitDistToTarget) * -2.0f) + -1.0f;
+        float moveForwardReward = ((curDistToTarget / m_InitDistToTarget) * -2.0f) + 1.0f;
 
 
         // // Set reward for this step according to mixture of the following elements.

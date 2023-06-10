@@ -858,7 +858,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 16.233276
+    limit: 21.666239
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -2527,10 +2527,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.00050356024
-  m_Height: 0.0011047444
+  m_Radius: 0.0005425023
+  m_Height: 0.0011047443
   m_Direction: 1
-  m_Center: {x: 0.00001622051, y: 0.000528382, z: -0.00005078097}
+  m_Center: {x: 0.000015884894, y: 0.0005283821, z: -0.00005078097}
 --- !u!153 &6961240206896643870
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -4519,7 +4519,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 15.824203
+    limit: 22.956554
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
@@ -4805,7 +4805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 325
+    VectorObservationSize: 317
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 54
