@@ -18,9 +18,9 @@ public class Treadmill : MonoBehaviour
         
         if(this.name == "treadmill_slant")
         {
-            y += 0.05f;
+            y += 0.08f;
             this.transform.localPosition = new Vector3(x, y, z);
-            this.transform.localRotation = new Quaternion(0, 0, 5, 1);
+            this.transform.localRotation = new Quaternion(0, 0, -8, 1);
         } else
         {
             this.transform.localRotation = new Quaternion(0, 0, 0, 1);
@@ -30,11 +30,11 @@ public class Treadmill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.localPosition.x <= 0f)
+        if (this.transform.localPosition.x >= 16f)
         {
-            x = 16f;
+            x = 0f;
         }
         this.transform.localPosition = new Vector3(x, y, z);
-        x -= 0.0025f;
+        x += 0.0025f;
     }
 }
