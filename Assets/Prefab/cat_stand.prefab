@@ -264,7 +264,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -276,22 +276,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -13.179422
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 59.350327
+    limit: 60
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 10.034209
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -535,7 +535,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.05
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &1567010695160723337
@@ -746,7 +746,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &2066643581829344515
@@ -835,7 +835,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -862,7 +862,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -926,7 +926,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &2468125376540324138
@@ -1374,7 +1374,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -1386,22 +1386,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -21.31002
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 60.16739
+    limit: 60
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 6.38175
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -1645,7 +1645,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.05
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3074378463121079282
@@ -1945,7 +1945,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -1972,7 +1972,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -2036,7 +2036,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3261156135163453531
@@ -2247,7 +2247,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.05
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3510919155360203659
@@ -2427,7 +2427,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.05
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3530253585133437739
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3932616209746305787
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &5021527051628174784
@@ -3311,7 +3311,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -3323,22 +3323,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -17.622957
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 47.78611
+    limit: 60
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 9.681792
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -3795,7 +3795,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.05
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6393558728114123757
@@ -3883,7 +3883,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -3895,22 +3895,22 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -13.591338
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 57.046837
+    limit: 60
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 6.1884003
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -4063,7 +4063,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -4090,7 +4090,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -4154,7 +4154,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6813798642715903995
@@ -4496,7 +4496,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 0
+  m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -4523,7 +4523,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -4587,7 +4587,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 1
-  groundContactPenalty: -0.01
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &7699039404951864215
@@ -4808,9 +4808,9 @@ MonoBehaviour:
     VectorObservationSize: 317
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 54
+      m_NumContinuousActions: 62
       BranchSizes: 
-    VectorActionSize: 36000000
+    VectorActionSize: 3e000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -5128,6 +5128,10 @@ PrefabInstance:
     - target: {fileID: 2514443435243387629, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
       propertyPath: m_Name
       value: DirectionIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514443435243387629, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6026464216722085689, guid: e568400ebedb3474fac505995f12ed4a, type: 3}
       propertyPath: targetToLookAt

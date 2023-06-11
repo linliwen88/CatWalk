@@ -274,25 +274,25 @@ public class CatAgent : Agent
         bpDict[neck].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
         bpDict[head].SetJointTargetRotation(continuousActions[++i], 0, 0);
 
-        bpDict[flLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[flLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
         bpDict[flLeg_2].SetJointTargetRotation(continuousActions[++i], 0, 0);
         bpDict[flLeg_3].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[flLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[flLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
-        bpDict[frLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[frLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
         bpDict[frLeg_2].SetJointTargetRotation(continuousActions[++i], 0, 0);
         bpDict[frLeg_3].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[frLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[frLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
-        bpDict[blLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[blLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
         bpDict[blLeg_2].SetJointTargetRotation(continuousActions[++i], 0, 0);
         bpDict[blLeg_3].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[blLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[blLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
-        bpDict[brLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[brLeg_1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
         bpDict[brLeg_2].SetJointTargetRotation(continuousActions[++i], 0, 0);
         bpDict[brLeg_3].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[brLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[brLeg_4].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
         bpDict[tail].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
 
