@@ -324,22 +324,7 @@ public class CatAgent : Agent
         // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
         float standingReward = (GetBodyHeight() - m_InitBodyHeight) / m_InitBodyHeight;
 
-        // 2nd objective: move towards the target. [-1, 1]
-        // float moveForwardReward;
-        // m_curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-
-        // if(m_curDistToTarget < m_prevDistToTarget)
-        // {
-        //     moveForwardReward = 1.0f;
-        //     Debug.Log("Current distance to target: " + m_curDistToTarget);
-        // }
-        // else
-        // {
-        //     moveForwardReward = -1.0f;
-        // }
-        // m_prevDistToTarget = m_curDistToTarget;
-        // 2nd objective: Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        // 2nd objective: move towards the target. [0, 1]
         var cubeForward = m_OrientationCube.transform.forward;
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
         //Check for NaNs
@@ -354,8 +339,42 @@ public class CatAgent : Agent
         }
 
 
-        // 3rd objective: Altering legs. Reward only 2 feet on ground at any time. [-1, 1]
-        // float feetAlterReward;
+        // 3rd objective: Altering legs. [-0.5, 1]
+        float feetAlterReward = -0.1f;
+
+        var bpDict = m_JdController.bodyPartsDict;
+
+        if(bpDict[flLeg_4].groundContact.touchingGround && 
+           bpDict[frLeg_4].groundContact.touchingGround &&
+           bpDict[blLeg_4].groundContact.touchingGround &&
+           bpDict[brLeg_4].groundContact.touchingGround) // all four feet on the ground
+        {
+            feetAlterReward = -0.5f;
+        }
+        else if(bpDict[flLeg_4].groundContact.touchingGround) // front left foot on the ground
+        {
+            if((!bpDict[frLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[frLeg_4].rb.velocity) > 0.0) && 
+               (!bpDict[blLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[blLeg_4].rb.velocity) > 0.0)) 
+            { // front right and back left feet are lifted and moving forward
+                feetAlterReward = 1.0f;
+            }
+            else if(!bpDict[frLeg_4].groundContact.touchingGround) // front right foot not on the ground
+            {
+                feetAlterReward = 0.5f;
+            }
+        }
+        else if(bpDict[frLeg_4].groundContact.touchingGround) // front right foot on the ground
+        {
+             if((!bpDict[flLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[flLeg_4].rb.velocity) > 0.0) && 
+               (!bpDict[brLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[brLeg_4].rb.velocity) > 0.0)) 
+            { // front left and back right feet are lifted and moving forward
+                feetAlterReward = 1.0f;
+            }
+            else if(!bpDict[flLeg_4].groundContact.touchingGround) // front left foot not on the ground
+            {
+                feetAlterReward = 0.5f;
+            }
+        }
         
 
         // // Set reward for this step according to mixture of the following elements.
@@ -390,7 +409,7 @@ public class CatAgent : Agent
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward(standingReward * matchSpeedReward);
+        AddReward((standingReward * matchSpeedReward) + feetAlterReward);
     }
 
     /// <summary>
