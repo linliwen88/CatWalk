@@ -337,7 +337,8 @@ public class CatAgent : Agent
 
         // Geometric rewards prevents the agent only improving easy tasks.
         // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
-        float standingReward = (Math.Min(GetBodyHeight(), m_bodyHeight) - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
+        float standMetric = (Math.Max(Math.Min(GetBodyHeight(), m_bodyHeight), min_bodyHeight) - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
+        float standingReward = (0.5f - Mathf.Pow(1.0f - Mathf.Pow(standMetric, 2), 2)) * 2.0f;
 
         // 2nd objective: move towards the target. [-1, 1]
         // var cubeForward = m_OrientationCube.transform.forward;
@@ -372,7 +373,7 @@ public class CatAgent : Agent
         //    feetReward *= 20;
         //}
 
-        // Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
+        Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
         AddReward(standingReward);
