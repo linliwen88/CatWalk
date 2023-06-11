@@ -116,7 +116,7 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(tail);
 
         // Initialize body height to detect if cat is standing
-        m_InitBodyHeight = GetBodyHeight() * 0.8f;
+        m_InitBodyHeight = GetBodyHeight() * 0.95f;
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
         m_prevDistToTarget = m_InitDistToTarget;
 
@@ -339,8 +339,8 @@ public class CatAgent : Agent
         }
 
 
-        // 3rd objective: Altering legs. [-0.5, 1]
-        float feetAlterReward = -0.1f;
+        // 3rd objective: Altering legs. [0, 1]
+        float feetAlterReward;
 
         var bpDict = m_JdController.bodyPartsDict;
 
@@ -349,32 +349,13 @@ public class CatAgent : Agent
            bpDict[blLeg_4].groundContact.touchingGround &&
            bpDict[brLeg_4].groundContact.touchingGround) // all four feet on the ground
         {
-            feetAlterReward = -0.5f;
+            feetAlterReward = 0.0f;
         }
-        else if(bpDict[flLeg_4].groundContact.touchingGround) // front left foot on the ground
+        else
         {
-            if((!bpDict[frLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[frLeg_4].rb.velocity) > 0.0) && 
-               (!bpDict[blLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[blLeg_4].rb.velocity) > 0.0)) 
-            { // front right and back left feet are lifted and moving forward
-                feetAlterReward = 1.0f;
-            }
-            else if(!bpDict[frLeg_4].groundContact.touchingGround) // front right foot not on the ground
-            {
-                feetAlterReward = 0.5f;
-            }
+            feetAlterReward = 1.0f;
         }
-        else if(bpDict[frLeg_4].groundContact.touchingGround) // front right foot on the ground
-        {
-             if((!bpDict[flLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[flLeg_4].rb.velocity) > 0.0) && 
-               (!bpDict[brLeg_4].groundContact.touchingGround && Vector3.Dot(cubeForward, bpDict[brLeg_4].rb.velocity) > 0.0)) 
-            { // front left and back right feet are lifted and moving forward
-                feetAlterReward = 1.0f;
-            }
-            else if(!bpDict[flLeg_4].groundContact.touchingGround) // front left foot not on the ground
-            {
-                feetAlterReward = 0.5f;
-            }
-        }
+
         
 
         // // Set reward for this step according to mixture of the following elements.
@@ -409,7 +390,7 @@ public class CatAgent : Agent
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward((standingReward * matchSpeedReward) + feetAlterReward);
+        AddReward(standingReward * matchSpeedReward * feetAlterReward);
     }
 
     /// <summary>
