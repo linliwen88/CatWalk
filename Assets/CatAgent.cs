@@ -32,6 +32,7 @@ public class CatAgent : Agent
     //     get { return m_TargetWalkingSpeed; }
     //     set { m_TargetWalkingSpeed = Mathf.Clamp(value, .1f, m_maxWalkingSpeed); }
     // }
+    private float TargetWalkingSpeed = 2.0f;
 
     //The direction an agent will walk during training.
     [Header("Target To Walk Towards")]
@@ -115,7 +116,7 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(tail);
 
         // Initialize body height to detect if cat is standing
-        m_InitBodyHeight = GetBodyHeight();
+        m_InitBodyHeight = GetBodyHeight() * 0.8f;
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
         m_prevDistToTarget = m_InitDistToTarget;
 
@@ -320,23 +321,37 @@ public class CatAgent : Agent
         UpdateFeetForwardCount();
 
         // Geometric rewards prevents the agent only improving easy tasks.
-        // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
-        float standingReward = (((GetBodyHeight() - m_InitBodyHeight) / m_InitBodyHeight) * 2.0f) + 1.0f;
+        // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
+        float standingReward = (GetBodyHeight() - m_InitBodyHeight) / m_InitBodyHeight;
 
-        // 2nd objective: move towards the target. [0, 1]
-        float moveForwardReward;
-        m_curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
+        // 2nd objective: move towards the target. [-1, 1]
+        // float moveForwardReward;
+        // m_curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
 
-        if(m_curDistToTarget < m_prevDistToTarget)
+        // if(m_curDistToTarget < m_prevDistToTarget)
+        // {
+        //     moveForwardReward = 1.0f;
+        //     Debug.Log("Current distance to target: " + m_curDistToTarget);
+        // }
+        // else
+        // {
+        //     moveForwardReward = -1.0f;
+        // }
+        // m_prevDistToTarget = m_curDistToTarget;
+        // 2nd objective: Match target speed
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        var cubeForward = m_OrientationCube.transform.forward;
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * TargetWalkingSpeed, GetAvgVelocity());
+        //Check for NaNs
+        if (float.IsNaN(matchSpeedReward))
         {
-            moveForwardReward = 1.0f;
-            Debug.Log("Current distance to target: " + m_curDistToTarget);
+            throw new ArgumentException(
+                "NaN in moveTowardsTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" hips.velocity: {m_JdController.bodyPartsDict[pelvis].rb.velocity}\n" +
+                $" maximumWalkingSpeed: {15}"
+            );
         }
-        else
-        {
-            moveForwardReward = 0.0f;
-        }
-        m_prevDistToTarget = m_curDistToTarget;
 
 
         // 3rd objective: Altering legs. Reward only 2 feet on ground at any time. [-1, 1]
@@ -375,7 +390,7 @@ public class CatAgent : Agent
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward(standingReward * moveForwardReward);
+        AddReward(standingReward * matchSpeedReward);
     }
 
     /// <summary>
@@ -504,15 +519,15 @@ public class CatAgent : Agent
     /// <summary>
     /// Normalized value of the difference in actual speed vs goal walking speed.
     /// </summary>
-    // public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
-    // {
-    //     //distance between our actual velocity and goal velocity
-    //     var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, TargetWalkingSpeed);
+    public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
+    {
+        //distance between our actual velocity and goal velocity
+        var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, TargetWalkingSpeed);
 
-    //     //return the value on a declining sigmoid shaped curve that decays from 1 to 0
-    //     //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-    //     return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
-    // }
+        //return the value on a declining sigmoid shaped curve that decays from 1 to 0
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / TargetWalkingSpeed, 2), 2);
+    }
 
     /// <summary>
     /// Agent touched the target
