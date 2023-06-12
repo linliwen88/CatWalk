@@ -746,7 +746,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &2066643581829344515
@@ -1825,7 +1825,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3207017712066221648
@@ -2427,7 +2427,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3530253585133437739
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3932616209746305787
@@ -2948,7 +2948,7 @@ Rigidbody:
   m_Drag: 0.05
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &5021527051628174784
@@ -3615,7 +3615,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.1
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6357356663463388012
@@ -4814,9 +4814,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 031319713e9d37d43b4d0c9d66a00c32, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: Cat
   TeamId: 0
   m_UseChildSensors: 1

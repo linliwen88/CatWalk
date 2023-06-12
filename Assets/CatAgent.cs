@@ -340,20 +340,21 @@ public class CatAgent : Agent
 
 
         // 3rd objective: Altering legs. [0, 1]
-        float feetAlterReward;
+        float feetAlterReward = 0.0f;
 
         var bpDict = m_JdController.bodyPartsDict;
 
-        if(bpDict[flLeg_4].groundContact.touchingGround && 
-           bpDict[frLeg_4].groundContact.touchingGround &&
-           bpDict[blLeg_4].groundContact.touchingGround &&
-           bpDict[brLeg_4].groundContact.touchingGround) // all four feet on the ground
+        if(bpDict[flLeg_4].groundContact.touchingGround && flLeg_4.transform.position.x < frLeg_4.transform.position.x) // front left foot on the ground and in front of front right foot
         {
-            feetAlterReward = 0.0f;
+            // front right and back left thigh should swing
+            feetAlterReward += Mathf.Min(0.5f, bpDict[frLeg_1].rb.angularVelocity.magnitude);
+            feetAlterReward += Mathf.Min(0.5f, bpDict[blLeg_1].rb.angularVelocity.magnitude);
         }
-        else
+        else if(bpDict[frLeg_4].groundContact.touchingGround) // front right foot on the ground
         {
-            feetAlterReward = 1.0f;
+            // front left and back right thigh should swing
+            feetAlterReward += Mathf.Min(0.5f, bpDict[flLeg_1].rb.angularVelocity.magnitude);
+            feetAlterReward += Mathf.Min(0.5f, bpDict[brLeg_1].rb.angularVelocity.magnitude);
         }
 
         
