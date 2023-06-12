@@ -65,8 +65,9 @@ public class CatAgent : Agent
     public Transform brLeg_4;
     public Transform tail;
 
-    private float m_bodyHeight;
-    private float min_bodyHeight;
+    private float max_bodyHeight;
+    private float min_height;
+    private float max_headHeight;
     private float m_InitDistToTarget;
     private int feetInFrontCounter_front = 0; // the amount of steps one foot is in front of the other
     private int feetInFrontCounter_back = 0; // the amount of steps one foot is in front of the other
@@ -117,15 +118,19 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(tail);
 
         // Initialize body height to detect if cat is standing
-        m_bodyHeight = GetBodyHeight();
-        min_bodyHeight = flLeg_4.transform.position.y;
+        max_bodyHeight = GetBodyHeight();
+        min_height = flLeg_4.transform.position.y;
+        max_headHeight = head.transform.position.y;
 
-        var h_diff = m_bodyHeight - min_bodyHeight;
-        m_bodyHeight = h_diff * 0.9f + min_bodyHeight;
+
+        var bodyHeight_diff = max_bodyHeight - min_height;
+        max_bodyHeight = bodyHeight_diff * 0.9f + min_height;
+        var headHeight_diff = max_headHeight - min_height;
+        max_headHeight = headHeight_diff * 0.9f + min_height;
 
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
 
-        Debug.Log("Init body height: " + m_bodyHeight + ", min body height: " + min_bodyHeight);
+        Debug.Log("Init body height: " + max_bodyHeight + ", min body height: " + min_height);
         Debug.Log("Init distance to target: " + m_InitDistToTarget);
 
     }
@@ -337,8 +342,10 @@ public class CatAgent : Agent
 
         // Geometric rewards prevents the agent only improving easy tasks.
         // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
-        float standMetric = (Math.Max(Math.Min(GetBodyHeight(), m_bodyHeight), min_bodyHeight) - min_bodyHeight) / (m_bodyHeight - min_bodyHeight);
-        float standingReward = (0.5f - Mathf.Pow(1.0f - Mathf.Pow(standMetric, 2), 2)) * 2.0f;
+        float bodyStandMetric = (Math.Max(Math.Min(GetBodyHeight(), max_bodyHeight), min_height) - min_height) / (max_bodyHeight - min_height);
+        float headStandMetric = (Math.Max(Math.Min(head.transform.position.y, max_headHeight), min_height) - min_height) / (max_headHeight - min_height);
+
+        float standingReward = (0.5f - Mathf.Pow(1.0f - Mathf.Pow((0.5f * bodyStandMetric) + (0.5f * headStandMetric), 2), 2)) * 2.0f;
 
         // 2nd objective: move towards the target. [-1, 1]
         // var cubeForward = m_OrientationCube.transform.forward;
@@ -373,13 +380,15 @@ public class CatAgent : Agent
         //    feetReward *= 20;
         //}
 
-        Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
+        //Debug.Log("Standing reward: " + standingReward + ", body dir reward: " + bodyReward + ", feet dir reward: " + feetReward + ", distance reward: " + moveForwardReward);
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
+        // Debug.Log("Body Height reward: " + bodyStandMetric + ", Head Height reward: " + headStandMetric + ", Standing Reward: " + standingReward);
+
         AddReward(standingReward);
-        AddReward(moveForwardReward);
-        AddReward(bodyReward);
-        AddReward(feetReward);
+        //AddReward(moveForwardReward);
+        //AddReward(bodyReward);
+        // AddReward(feetReward);
     }
 
     /// <summary>

@@ -533,9 +533,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.05
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &1567010695160723337
@@ -746,7 +746,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.2
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &2066643581829344515
@@ -924,9 +924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.1
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &2468125376540324138
@@ -1643,9 +1643,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.05
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3074378463121079282
@@ -1825,7 +1825,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3207017712066221648
@@ -2034,9 +2034,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.1
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3261156135163453531
@@ -2245,9 +2245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.05
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3510919155360203659
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.2
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &3932616209746305787
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.2
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &5021527051628174784
@@ -3615,7 +3615,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.02
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6357356663463388012
@@ -3793,9 +3793,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.05
+  groundContactPenalty: -0.2
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6393558728114123757
@@ -4152,9 +4152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.1
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &6813798642715903995
@@ -4585,9 +4585,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -0.1
+  groundContactPenalty: -0.5
   touchingGround: 0
   touchingWall: 0
 --- !u!1 &7699039404951864215
@@ -4814,7 +4814,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 99c5bc834d9a20e4896103addfd9daa6, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 6b25a57086e2f3348ad2efec1801685c, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 2
   m_BehaviorName: Cat
