@@ -15,7 +15,7 @@ namespace Unity.MLAgentsExamples
 
         [Header("Ground Check")] public bool agentDoneOnGroundContact; // Whether to reset agent on ground contact.
         public bool penalizeGroundContact; // Whether to penalize on contact.
-        public float groundContactPenalty = 0; // Penalty amount (ex: -1).
+        public float groundContactPenalty; // Penalty amount (ex: -1).
         public bool touchingGround;
         public bool touchingWall;
         const string k_Ground = "ground"; // Tag of ground object.

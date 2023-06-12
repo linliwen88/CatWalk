@@ -1570,7 +1570,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 100.87977
+    limit: 88.79832
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -3082,7 +3082,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -28.043177
+    limit: -25.157238
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
@@ -4075,7 +4075,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -57.06175
+    limit: -80.164734
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
@@ -4814,7 +4814,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 6b25a57086e2f3348ad2efec1801685c, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: fcd46ea8740fade409fc3f26d80cedf4, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 2
   m_BehaviorName: Cat

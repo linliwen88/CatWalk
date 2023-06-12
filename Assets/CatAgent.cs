@@ -341,20 +341,20 @@ public class CatAgent : Agent
         UpdateFeetForwardCount();
 
         // Geometric rewards prevents the agent only improving easy tasks.
-        // 1st objective: standing, fix the height of pelvis in certain threshold. [0, 1]
+        // 1st objective: standing, fix the height of pelvis in certain threshold. [-1, 1]
         float bodyStandMetric = (Math.Max(Math.Min(GetBodyHeight(), max_bodyHeight), min_height) - min_height) / (max_bodyHeight - min_height);
         float headStandMetric = (Math.Max(Math.Min(head.transform.position.y, max_headHeight), min_height) - min_height) / (max_headHeight - min_height);
 
         float standingReward = (0.5f - Mathf.Pow(1.0f - Mathf.Pow((0.5f * bodyStandMetric) + (0.5f * headStandMetric), 2), 2)) * 2.0f;
 
-        // 2nd objective: move towards the target. [-1, 1]
+        // 2nd objective: move towards the target. [-inf, 1]
         // var cubeForward = m_OrientationCube.transform.forward;
         // float moveForwardReward = Vector3.Dot(GetBodyVelocity().normalized, cubeForward);
         float curDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-        float moveForwardReward = Mathf.Pow(1.0f - Mathf.Pow(curDistToTarget / m_InitDistToTarget, 2), 2);
+        float distanceReward = Mathf.Pow(1.0f - Mathf.Pow(curDistToTarget / m_InitDistToTarget, 2), 2);
         if ((curDistToTarget / m_InitDistToTarget) > 1.0f)
         {
-            moveForwardReward *= -1;
+            distanceReward *= -1;
         }
 
 
@@ -386,8 +386,8 @@ public class CatAgent : Agent
         // Debug.Log("Body Height reward: " + bodyStandMetric + ", Head Height reward: " + headStandMetric + ", Standing Reward: " + standingReward);
 
         AddReward(standingReward);
-        //AddReward(moveForwardReward);
-        //AddReward(bodyReward);
+        AddReward(distanceReward);
+        AddReward(bodyReward);
         // AddReward(feetReward);
     }
 
