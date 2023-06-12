@@ -391,7 +391,7 @@ public class CatAgent : Agent
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward(standingReward * matchSpeedReward * feetAlterReward);
+        AddReward(matchSpeedReward);
     }
 
     /// <summary>
