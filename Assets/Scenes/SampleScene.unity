@@ -351,11 +351,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
---- !u!4 &530804537 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7533039846145160929, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
-  m_PrefabInstance: {fileID: 6820029734032791007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &561816255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -413,6 +408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+--- !u!4 &599691387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 577633011183876359, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+  m_PrefabInstance: {fileID: 6820029734032791007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &663589986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec40c70d5160b47cd8deaab79e24892c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 530804537}
+  target: {fileID: 599691387}
   smoothingTime: 0
 --- !u!1001 &1164937605
 PrefabInstance:
@@ -1230,6 +1230,10 @@ PrefabInstance:
     - target: {fileID: 6820029733949505827, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_Name
       value: TrainingArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931989485150571806, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: MaxStep
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}

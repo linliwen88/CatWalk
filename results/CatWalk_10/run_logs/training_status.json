@@ -1,0 +1,65 @@
+{
+    "Cat": {
+        "checkpoints": [
+            {
+                "steps": 5999800,
+                "file_path": "results\\CatWalk_10\\Cat\\Cat-5999800.onnx",
+                "reward": 261.94103458949496,
+                "creation_time": 1686604462.1689062,
+                "auxillary_file_paths": [
+                    "results\\CatWalk_10\\Cat\\Cat-5999800.pt"
+                ]
+            },
+            {
+                "steps": 6499750,
+                "file_path": "results\\CatWalk_10\\Cat\\Cat-6499750.onnx",
+                "reward": 241.4195097409762,
+                "creation_time": 1686605234.804512,
+                "auxillary_file_paths": [
+                    "results\\CatWalk_10\\Cat\\Cat-6499750.pt"
+                ]
+            },
+            {
+                "steps": 6999232,
+                "file_path": "results\\CatWalk_10\\Cat\\Cat-6999232.onnx",
+                "reward": 255.65855875882235,
+                "creation_time": 1686606017.6883938,
+                "auxillary_file_paths": [
+                    "results\\CatWalk_10\\Cat\\Cat-6999232.pt"
+                ]
+            },
+            {
+                "steps": 7499524,
+                "file_path": "results\\CatWalk_10\\Cat\\Cat-7499524.onnx",
+                "reward": 252.96772610057485,
+                "creation_time": 1686606809.1624615,
+                "auxillary_file_paths": [
+                    "results\\CatWalk_10\\Cat\\Cat-7499524.pt"
+                ]
+            },
+            {
+                "steps": 7876524,
+                "file_path": "results\\CatWalk_10\\Cat\\Cat-7876524.onnx",
+                "reward": 252.58590896313007,
+                "creation_time": 1686607400.5578692,
+                "auxillary_file_paths": [
+                    "results\\CatWalk_10\\Cat\\Cat-7876524.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 7876524,
+            "file_path": "results\\CatWalk_10\\Cat.onnx",
+            "reward": 252.58590896313007,
+            "creation_time": 1686607400.5578692,
+            "auxillary_file_paths": [
+                "results\\CatWalk_10\\Cat\\Cat-7876524.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

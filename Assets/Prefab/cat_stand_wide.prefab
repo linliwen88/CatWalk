@@ -744,7 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -2425,7 +2425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -2979,7 +2979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -3613,7 +3613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
+  agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
   groundContactPenalty: -0.1
   touchingGround: 0
@@ -4814,9 +4814,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 035465fdd50d5c149bf9076cb3cabd70, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 352937cdd8cb5c14a96216d2066eba37, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: Cat
   TeamId: 0
   m_UseChildSensors: 1
@@ -4837,7 +4837,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 10000
+  MaxStep: 5000
   TargetPrefab: {fileID: 7834940038056149002, guid: a3b95a04234f9b24f8a6901810486e1d, type: 3}
   root: {fileID: 7426983802653218743}
   pelvis: {fileID: 8898909090301739085}

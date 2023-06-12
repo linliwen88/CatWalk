@@ -116,7 +116,7 @@ public class CatAgent : Agent
         m_JdController.SetupBodyPart(tail);
 
         // Initialize body height to detect if cat is standing
-        m_InitBodyHeight = GetBodyHeight() * 0.95f;
+        m_InitBodyHeight = GetBodyHeight() * 0.9f;
         m_InitDistToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
         m_prevDistToTarget = m_InitDistToTarget;
 
@@ -391,7 +391,7 @@ public class CatAgent : Agent
 
         // AddReward(matchSpeedReward * lookAtTargetReward);
 
-        AddReward(matchSpeedReward);
+        AddReward((standingReward * feetAlterReward) + matchSpeedReward);
     }
 
     /// <summary>
