@@ -38,6 +38,7 @@ namespace Unity.MLAgentsExamples
                 if (agentDoneOnGroundContact)
                 {
                     agent.EndEpisode();
+                    agent.SetReward(groundContactPenalty);
                 }
             }
 
