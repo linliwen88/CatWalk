@@ -848,14 +848,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.17040572, y: -0.21925052, z: 0.038923003, w: 0.95988345}
-  m_LocalPosition: {x: -11.1, y: 5.91, z: -7.12}
+  m_LocalRotation: {x: 0.17775936, y: -0.17694147, z: 0.032509908, w: 0.9674898}
+  m_LocalPosition: {x: -4.62, y: 8.79, z: -10.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.133, y: -25.733, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.822, y: -20.728, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,7 +1123,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6752254794726679988, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6820029733949505826, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_RootOrder
@@ -1179,11 +1179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6820029735054897702, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7188144645932067931, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
@@ -1255,6 +1255,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4305378880204372875, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704369947661030979, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718684224681777973, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6273191378058911430, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401117707457240188, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582696092796104228, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666473163259695237, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792549929343755297, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6820029733949505826, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1303,9 +1335,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingArea
       objectReference: {fileID: 0}
+    - target: {fileID: 6908380719028718840, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362073996455240084, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7998395864199521134, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
       propertyPath: m_Model
       value: 
+      objectReference: {fileID: 5022602860645237092, guid: fcd46ea8740fade409fc3f26d80cedf4, type: 3}
+    - target: {fileID: 8101501238527295023, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596549279142494380, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900142428521585597, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130731206923803538, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c9b7159d9877a4e942dffe9efecc4b, type: 3}
