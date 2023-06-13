@@ -45,7 +45,7 @@ Or follow these instructions
 - Use command `mlagents-learn CatWalk/config/CatWalk.yaml --run-id=catWalk`
 then press play in Unity
 
-- Use command `tensorboard --logdir results`to observing training progress
+- Use command `tensorboard --logdir results` to observe training progress
 
 
 ## To run on executable (for faster training):
