@@ -1,5 +1,7 @@
 # CatWalk
-Reinforcement learning for cat walking motion through Unity ML-Agents Toolkit
+![Taining Scene](Docs/Image.png)
+
+**Reinforcement learning for cat walking motion through Unity ML-Agents Toolkit**
 ## Getting Started
 
  - Installation page: https://github.com/Unity-Technologies/ml-agents/blob/release_10_docs/docs/Installation.md
@@ -16,14 +18,14 @@ Or follow these instructions
 `pip3 install torch==1.7.0 -f https://download.pytorch.org/whl/torch_stable.html`
 `pip3 install mlagents`
 
-4. for [Pillow, grpcio, h5py], do:
+4. For [Pillow, grpcio, h5py], do:
 `pip3 uninstall [package]`
 `pip3 install [package] --upgrade`
 
 5. `pip3 install protobuf==3.20.*`
 `pip3 install numpy==1.21.2`
 
-6. try: 'mlagents-learn --help`
+6. Try: 'mlagents-learn --help`
      -this should display a help screen properly
 
 7. Open CatWalk project
@@ -34,9 +36,8 @@ Or follow these instructions
 
 10. Now just press play and the model will do what it was trained
 
---------------------------
 
-## TRAINING
+## Training
 
 11. To train in unity:
 `mlagents-learn CatWalk/config/CatWalk.yaml --run-id=catWalk`
@@ -45,7 +46,6 @@ then press play
 12. To view tensorboard graphs:
 `tensorboard --logdir results`
 
--------------------------
 
 ## To run on executable (for faster training):
 
