@@ -25,7 +25,7 @@ Or follow these instructions
 5. `pip3 install protobuf==3.20.*`
 `pip3 install numpy==1.21.2`
 
-6. Try: 'mlagents-learn --help`
+6. Try: `mlagents-learn --help`
      -this should display a help screen properly
 
 7. Open CatWalk project
